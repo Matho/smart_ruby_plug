@@ -1,0 +1,46 @@
+screens:
+  ok_screen:
+    id: 1
+  error_screen:
+    id: 2
+  boot_screen:
+    id: 3
+
+timers:
+  boot_countdown_timer: 300
+
+internet_provider:
+  name: 'Starlink'
+
+ping:
+#  TODO increase to 1 minute?
+  interval: 30 # seconds
+
+  urls:
+    for_internet:
+      - "8.8.8.8" # Google DNS
+      - "8.8.4.4" # Google DNS
+      - "1.1.1.1" # Cloudflare
+    for_wifi:
+      antennas:
+#        if you do NOT want to ping all this services, simply remove it
+        provider:
+          -
+            url: "10.0.3.3"
+            name: 'UISP 1090'
+          -
+            url: "10.0.3.10"
+            name: 'Wifi 1090'
+          -
+            url: "10.0.3.1"
+            name: 'Router 1090'
+        client:
+          -
+            url: "10.0.3.11"
+            name: 'Wifi 1099'
+          -
+            url: "192.168.0.1"
+            name: 'Router 1099'
+
+
+
