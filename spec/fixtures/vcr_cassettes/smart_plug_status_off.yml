@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://10.0.3.100:8123/api/states/switch.smart_zasuvka_1090
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZTBmYzBlMWRiZTE0MzA3OWYzNDkxMDExNzIxZmU0YyIsImlhdCI6MTY1NzQ5MzI4MiwiZXhwIjoxOTcyODUzMjgyfQ._SsIsZGIyOSuu9zfWs-_-la-0SDL8cm-h6K8zvbT_mM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '238'
+      Date:
+      - Sat, 16 Jul 2022 12:21:19 GMT
+      Server:
+      - Python/3.10 aiohttp/3.8.1
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRpdHlfaWQiOiJzd2l0Y2guc21hcnRfemFzdXZrYV8xMDkwIiwic3RhdGUiOiJvZmYiLCJhdHRyaWJ1dGVzIjp7ImZyaWVuZGx5X25hbWUiOiJTbWFydCB6w6FzdXZrYSAxMDkwIn0sImxhc3RfY2hhbmdlZCI6IjIwMjItMDctMTZUMTI6MjE6MTUuMjQyMzQyKzAwOjAwIiwibGFzdF91cGRhdGVkIjoiMjAyMi0wNy0xNlQxMjoyMToxNS4yNDIzNDIrMDA6MDAiLCJjb250ZXh0Ijp7ImlkIjoiMDFHODNGOUJGNU1EQVNOVFNNWEJXUFoyTlIiLCJwYXJlbnRfaWQiOm51bGwsInVzZXJfaWQiOiI3YjRkYjRlNTE3NjE0YWM1YjMxYjI1MmI2ODc3NDczYyJ9fQ==
+  recorded_at: Sat, 16 Jul 2022 12:21:19 GMT
+recorded_with: VCR 6.1.0

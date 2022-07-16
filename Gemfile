@@ -1,14 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'thor'
 gem 'ffi'
 gem 'httparty'
 gem 'net-ping'
+gem 'require_all'
+gem 'thor'
 
-group :development do
-  gem 'pry'
-  gem 'pry-byebug'
-  gem 'rubocop'
-end
+# development
+gem 'rubocop'
+
+# test
+gem 'rspec'
+gem 'vcr'
+gem 'webmock'
 
 gemspec

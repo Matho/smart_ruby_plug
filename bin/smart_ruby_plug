@@ -3,3 +3,6 @@
 
 require_relative "../lib/main"
 Main.new.start
+
+# Example start
+# bin/smart_ruby_plug start

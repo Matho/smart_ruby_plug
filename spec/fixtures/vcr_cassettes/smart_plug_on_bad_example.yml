@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost/
+    body:
+      encoding: UTF-8
+      string: '{"entity_id":"switch.smart_zasuvka_1090"}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZTBmYzBlMWRiZTE0MzA3OWYzNDkxMDExNzIxZmU0YyIsImlhdCI6MTY1NzQ5MzI4MiwiZXhwIjoxOTcyODUzMjgyfQ._SsIsZGIyOSuu9zfWs-_-la-0SDL8cm-h6K8zvbT_mM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 502
+      message: Bad Gateway
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 16 Jul 2022 11:56:52 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '643'
+      Connection:
+      - keep-alive
+      Etag:
+      - '"5e9c0d3e-283"'
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>We're sorry, but something went wrong (500)</title>
+          <style type="text/css">
+            body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
+            div.dialog {
+              width: 25em;
+              padding: 0 4em;
+              margin: 4em auto 0 auto;
+              border: 1px solid #ccc;
+              border-right-color: #999;
+              border-bottom-color: #999;
+            }
+            h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+          </style>
+        </head>
+
+        <body>
+          <!-- This file lives in public/500.html -->
+          <div class="dialog">
+            <h1>We're sorry, but something went wrong.</h1>
+          </div>
+        </body>
+        </html>
+  recorded_at: Sat, 16 Jul 2022 11:56:52 GMT
+recorded_with: VCR 6.1.0

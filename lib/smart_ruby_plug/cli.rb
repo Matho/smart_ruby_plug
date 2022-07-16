@@ -2,19 +2,13 @@ require "thor"
 
 module SmartRubyPlug
   class Cli < ::Thor
-    desc "hello NAME", "say hello to NAME"
-    def hello(name)
-      puts "Starting the app"
+    desc 'start', 'start the SmartRubyPlug app'
+    def start
+      SmartRubyPlug::StdoutLogger.logger.info("Starting SmartRubyPlug with version #{SmartRubyPlug::Version::VERSION} ...")
 
-      # pp Config.parsed_settings
+      SmartRubyPlug::Processor.new.process
 
-      # p SmartRubyPlug::Requests::WifiRequest.new.do_request
-
-      p SmartRubyPlug::Requests::InternetRequest.new.do_request
-
-
-      # ::MyLibrary.LCD_1in3_test
-      # ::MyLibrary.KEY_1in3_test
+      SmartRubyPlug::StdoutLogger.logger.info('Exiting SmartRubyPlug ...')
     end
   end
 end

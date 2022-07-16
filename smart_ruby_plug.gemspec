@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'thor',  '>= 1.2', '< 2'
   spec.add_development_dependency "bundler", ">= 1.0", "< 3"
   spec.authors = ["Martin Markech"]
-  spec.description = "SmartRubyPlug is project to monitor your internet connection"
+  spec.description = "SmartRubyPlug is project to monitor your internet connection and turn on the internet on demand"
   spec.email = "martin.markech@matho.sk"
   spec.executables = %w(smart_ruby_plug)
   spec.files = %w(smart_ruby_plug.gemspec) + Dir["*.md", "bin/*", "lib/**/*.rb"]

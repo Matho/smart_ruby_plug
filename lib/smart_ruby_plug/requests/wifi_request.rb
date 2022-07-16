@@ -1,5 +1,3 @@
-require 'net/ping'
-
 module SmartRubyPlug
   module Requests
     class WifiRequest
@@ -29,6 +27,8 @@ module SmartRubyPlug
           net_ping = Net::Ping::External.new(hash[:url])
 
           unless net_ping.ping?
+            SmartRubyPlug::StdoutLogger.logger.info("Wifi ping - failed ping for '#{hash[:url]}'")
+
             errors = hash
             break
           end

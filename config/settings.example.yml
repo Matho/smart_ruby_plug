@@ -1,11 +1,11 @@
 timers:
-  boot_countdown_timer: 20 # seconds
+  boot_countdown_timer: 300 # seconds
 
 internet_provider:
   name: 'Starlink'
 
 home_assistant_node:
-  host: 'http://10.0.2.152:8123'
+  host: 'http://10.0.3.100:8123'
   name: 'Home Assistant'
   long_lived_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZTBmYzBlMWRiZTE0MzA3OWYzNDkxMDExNzIxZmU0YyIsImlhdCI6MTY1NzQ5MzI4MiwiZXhwIjoxOTcyODUzMjgyfQ._SsIsZGIyOSuu9zfWs-_-la-0SDL8cm-h6K8zvbT_mM'
   smart_plug_entity_id: 'switch.smart_zasuvka_1090'
@@ -14,9 +14,9 @@ smart_plug:
   name: 'Plug 1090'
 
 ping:
-  interval: 10 # 30 seconds
-  check_wifi: false
-  check_internet: false
+  interval: 30 # seconds
+  check_wifi: true
+  check_internet: true
 
   urls:
     for_internet:

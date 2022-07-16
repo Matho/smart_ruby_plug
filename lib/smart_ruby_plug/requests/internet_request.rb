@@ -19,12 +19,12 @@ module SmartRubyPlug
         if net_ping.ping?
           []
         else
-          [
-            {
-              url: url,
-              name: @internet_provider_name
-            }
-          ]
+          SmartRubyPlug::StdoutLogger.logger.info("Internet ping - failed ping for '#{@internet_provider_name}'")
+
+          {
+            url: url,
+            name: @internet_provider_name
+          }
         end
       end
 

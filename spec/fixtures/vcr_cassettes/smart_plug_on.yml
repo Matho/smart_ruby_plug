@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://10.0.3.100:8123/api/services/switch/turn_on
+    body:
+      encoding: UTF-8
+      string: '{"entity_id":"switch.smart_zasuvka_1090"}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZTBmYzBlMWRiZTE0MzA3OWYzNDkxMDExNzIxZmU0YyIsImlhdCI6MTY1NzQ5MzI4MiwiZXhwIjoxOTcyODUzMjgyfQ._SsIsZGIyOSuu9zfWs-_-la-0SDL8cm-h6K8zvbT_mM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '10'
+      Date:
+      - Sat, 16 Jul 2022 11:43:54 GMT
+      Server:
+      - Python/3.10 aiohttp/3.8.1
+    body:
+      encoding: ASCII-8BIT
+      string: "[]"
+  recorded_at: Sat, 16 Jul 2022 11:43:54 GMT
+recorded_with: VCR 6.1.0
