@@ -3,9 +3,9 @@
 Do you want to reduce monthly energy costs of your Starlink Internet connection? 
 
 The project has 3 repositories
-- `Matho/smart_ruby_plug` - this is main Ruby project
-- `Matho/smart_ruby_plug_c` - C source code for those, who want to change the drawing on the Raspberry Pi display
-- `Matho/smart_ruby_plug_c_binaries` - prebuilded C binaries (.so file) for those, who do not want to build the binary from source code
+- [Matho/smart_ruby_plug](https://github.com/Matho/smart_ruby_plug) - this is main Ruby project
+- [Matho/smart_ruby_plug_c](https://github.com/Matho/smart_ruby_plug_c) - C source code for those, who want to change the drawing on the Raspberry Pi display
+- [Matho/smart_ruby_plug_c_binaries](https://github.com/Matho/smart_ruby_plug_c_binaries) - prebuilded C binaries (.so file) for those, who do not want to build the binary from source code
 
 
 ## 1. The motivation behind this project
