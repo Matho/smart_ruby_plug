@@ -11,15 +11,15 @@ Gem::Specification.new do |spec|
   spec.email = "martin.markech@matho.sk"
   spec.executables = %w(smart_ruby_plug)
   spec.files = %w(smart_ruby_plug.gemspec) + Dir["*.md", "bin/*", "lib/**/*.rb"]
-  spec.homepage = "http://matho.sk/"
+  spec.homepage = "https://github.com/Matho/smart_ruby_plug"
   spec.licenses = %w(MIT)
   spec.name = "SmartRubyPlug"
   spec.metadata = {
-    "bug_tracker_uri" => "http://matho.sk/",
-    "changelog_uri" => "http://matho.sk/",
-    "documentation_uri" => "http://matho.sk/",
-    "source_code_uri" => "http://matho.sk/",
-    "wiki_uri" => "http://matho.sk/",
+    "bug_tracker_uri" => "https://github.com/Matho/smart_ruby_plug",
+    "changelog_uri" => "https://github.com/Matho/smart_ruby_plug/blob/master/Changelog.md",
+    "documentation_uri" => "https://github.com/Matho/smart_ruby_plug/blob/master/README.md",
+    "source_code_uri" => "https://github.com/Matho/smart_ruby_plug",
+    "wiki_uri" => "https://github.com/Matho/smart_ruby_plug",
     "rubygems_mfa_required" => "false",
   }
   spec.require_paths = %w(lib)
