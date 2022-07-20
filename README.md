@@ -232,6 +232,11 @@ If you want to compile the C code instead of using the prebuilded binary, you ca
 
 The instructions are extracted from [https://www.waveshare.com/wiki/1.3inch_LCD_HAT](https://www.waveshare.com/wiki/1.3inch_LCD_HAT)
 
+To be able build the libraries, you need to install:  
+```
+sudo apt-get install gcc cmake
+```
+
 **Install BCM2835 libraries**
 
 ```
