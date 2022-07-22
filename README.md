@@ -2,11 +2,10 @@
 
 Do you want to reduce monthly energy costs of your Starlink Internet connection? 
 
-The project has 4 repositories
+The project has 3 repositories
 - [Matho/smart_ruby_plug](https://github.com/Matho/smart_ruby_plug) - this is main Ruby project
 - [Matho/smart_ruby_plug_c](https://github.com/Matho/smart_ruby_plug_c) - C source code for those, who want to change the drawing on the Raspberry Pi display
 - [Matho/smart_ruby_plug_c_binaries](https://github.com/Matho/smart_ruby_plug_c_binaries) - prebuilded C binaries (.so file) for those, who do not want to build the binary from source code
-- [Matho/smart_ruby_plug_docker](https://github.com/Matho/smart_ruby_plug_docker) - docker files with prebuilded Docker images for the rpi remote control device
 
 You can find the **demo video** at [this link](http://websupport.matho.sk/smart_plug.webm)
 
@@ -272,7 +271,6 @@ Build the project via Makefile (or via Clion IDE, if you have configured it corr
 ```
 make clean
 make
-sudo ./main 
 ```
 You should see new `main.so` file. You can prepare symlink for Ruby project:
 ```
@@ -359,7 +357,59 @@ Log in to your raspberry pi, `cd` to the project and run:
 
 The project need the prebuilded `.so` file. 
 
-## 6. TODOs
+
+## 6. Readme for Dockerfile building
+
+### 6.1 Install Docker
+```
+sudo apt-get install \
+apt-transport-https \
+ca-certificates \
+curl \
+gnupg-agent \
+software-properties-common
+```
+
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+Use proper architecture - `arm64` for > Raspberry Pi 3B or `armhf` for < Raspberry Pi 2B
+```
+sudo add-apt-repository \
+"deb [arch=arm64] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) \
+stable"
+```
+
+```
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo docker run hello-world
+```
+
+### 6.2 Build this image
+`cd ~/docker-builds/smart_ruby_plug`
+
+For aarch64:  
+`sudo docker build --no-cache --file Dockerfile_aarch64 -t mathosk/smart_ruby_plug_docker:v0.1.0.beta .`
+
+Alternatively for armv7l:  
+`sudo docker build --no-cache --file Dockerfile_armv7l -t mathosk/smart_ruby_plug_docker:v0.1.0.beta .`
+
+### 6.3 Execute
+```
+sudo docker run --privileged -d mathosk/smart_ruby_plug_docker:v0.1.0.beta 
+```
+
+**Note:** amd64 arch is not prebuilded, as you need to run this sw on the Raspberry Pi. 
+
+### 6.4 TODO
+- use config folder as mapping for docker run command
+- use docker-compose
+- use ENV for Dockerfile to install version on demand
+- use WORKDIR command
+
+## 7. TODOs
 - add display redrawer specs
 - tag and push to RubyGems, once ready to use it in production
 - prepare as docker repository
