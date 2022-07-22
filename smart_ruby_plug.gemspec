@@ -1,15 +1,13 @@
-# coding: utf-8
-lib = File.expand_path("../lib/", __FILE__)
-$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
+# Encoding: UTF-8
+$:.push File.expand_path('../lib', __FILE__)
 require "smart_ruby_plug/version"
 
 Gem::Specification.new do |spec|
   spec.add_dependency 'thor',  '>= 1.2', '< 2'
   spec.add_development_dependency "bundler", ">= 1.0", "< 3"
   spec.authors = ["Martin Markech"]
-  spec.description = "SmartRubyPlug is project to monitor your internet connection and turn on the internet on demand"
+  spec.description = "Smart Ruby Plug is project to monitor your internet connection and turn on the internet on demand"
   spec.email = "martin.markech@matho.sk"
-  spec.executables = %w(smart_ruby_plug)
   spec.files = %w(smart_ruby_plug.gemspec) + Dir["*.md", "bin/*", "lib/**/*.rb"]
   spec.homepage = "https://github.com/Matho/smart_ruby_plug"
   spec.licenses = %w(MIT)

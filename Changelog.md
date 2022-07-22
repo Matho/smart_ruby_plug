@@ -1,3 +1,6 @@
+## 0.1.2.beta
+- fix gemspec
+
 ## 0.1.1.beta
 - added Dockerfiles 
 - added docker and docker-compose installation doc
