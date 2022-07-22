@@ -431,14 +431,6 @@ sudo docker-compose down
 I have installed Ubuntu 22.04 32bit edition on Raspberry Pi 2B model . This model has 1GB ram.
 In standby mode, without this application, it takes 180MB ram. With this app it is almost 200MB ram usage.
 
-
-### 6.4 TODO
-- use config folder as mapping for docker run command
-- use docker-compose
-- use ENV for Dockerfile to install version on demand
-- use WORKDIR command
-
 ## 7. TODOs
 - add display redrawer specs
 - tag and push to RubyGems, once ready to use it in production
-- prepare as docker repository
