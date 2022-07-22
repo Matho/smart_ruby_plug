@@ -1,0 +1,9 @@
+Dockerfile
+.byebug_history
+.rspec
+README.md
+doc/*
+log/*
+tmp/*
+.git/*
+.idea/*

@@ -358,7 +358,7 @@ Log in to your raspberry pi, `cd` to the project and run:
 The project need the prebuilded `.so` file. 
 
 
-## 6. Readme for Dockerfile building
+## 6. Dockerfile building
 
 ### 6.1 Install Docker
 ```
@@ -388,17 +388,18 @@ sudo docker run hello-world
 ```
 
 ### 6.2 Build this image
-`cd ~/docker-builds/smart_ruby_plug`
+`cd ~/docker-builds/smart_ruby_plug`  
+Pass `--no-cache` for clean build and pass correct url with C binary version for C_BINARY_PATH arg.
 
 For aarch64:  
-`sudo docker build --no-cache --file Dockerfile_aarch64 -t mathosk/smart_ruby_plug_docker:v0.1.0.beta .`
+`sudo docker build -t mathosk/smart_ruby_plug:v0.1.0.beta --build-arg ARCH=aarch64 --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/releases/download/v0.1.0.beta/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
 
 Alternatively for armv7l:  
-`sudo docker build --no-cache --file Dockerfile_armv7l -t mathosk/smart_ruby_plug_docker:v0.1.0.beta .`
+`sudo docker build -t mathosk/smart_ruby_plug:v0.1.0.beta --build-arg ARCH=armv7l --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv7l_32/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
 
 ### 6.3 Execute
 ```
-sudo docker run --privileged -d mathosk/smart_ruby_plug_docker:v0.1.0.beta 
+sudo docker run --privileged -d mathosk/smart_ruby_plug:v0.1.0.beta 
 ```
 
 **Note:** amd64 arch is not prebuilded, as you need to run this sw on the Raspberry Pi. 
