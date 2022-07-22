@@ -383,7 +383,9 @@ stable"
 
 ```
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
+
+
 sudo docker run hello-world
 ```
 
@@ -392,17 +394,43 @@ sudo docker run hello-world
 Pass `--no-cache` for clean build and pass correct url with C binary version for C_BINARY_PATH arg.
 
 For aarch64:  
-`sudo docker build -t mathosk/smart_ruby_plug:v0.1.0.beta --build-arg ARCH=aarch64 --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/releases/download/v0.1.0.beta/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
+`sudo docker build -t mathosk/smart_ruby_plug:v0.1.0.beta_aarch64 --build-arg ARCH=aarch64 --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/releases/download/v0.1.0.beta/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
 
 Alternatively for armv7l:  
-`sudo docker build -t mathosk/smart_ruby_plug:v0.1.0.beta --build-arg ARCH=armv7l --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv7l_32/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
+`sudo docker build -t mathosk/smart_ruby_plug:v0.1.0.beta_armv7l --build-arg ARCH=armv7l --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv7l_32/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
 
 ### 6.3 Execute
+`-d` means detached - running in background. If you do not want to run it in background (for test purposes) remove `-d` option from command line
+
 ```
 sudo docker run --privileged -d mathosk/smart_ruby_plug:v0.1.0.beta 
 ```
 
 **Note:** amd64 arch is not prebuilded, as you need to run this sw on the Raspberry Pi. 
+
+#### 6.3.1 Docker Compose
+You need to have installed the `docker-compose` package. Check it via:
+`docker-compose --version`
+
+Copy `smart_ruby_plug/config/settings.yml` file with modified yml according your needs and upload it to folder
+`/data/smart_ruby_plug/config` on your Raspberry Pi. 
+
+The docker-compose file is located in this project root. Please, before you start it, point to correct version you want to pull.
+
+You can start the project via: (use `-d` for run in background)  
+```
+sudo docker-compose -f docker-compose_aarch64.yml up -d
+```
+
+You can stop it via:  
+```
+sudo docker-compose down
+```
+
+#### 6.3.2 Ram usage
+I have installed Ubuntu 22.04 32bit edition on Raspberry Pi 2B model . This model has 1GB ram.
+In standby mode, without this application, it takes 180MB ram. With this app it is almost 200MB ram usage.
+
 
 ### 6.4 TODO
 - use config folder as mapping for docker run command
