@@ -358,7 +358,7 @@ Log in to your raspberry pi, `cd` to the project and run:
 The project need the prebuilded `.so` file. 
 
 
-## 6. Dockerfile building
+## 6. Dockerfile building and running via Docker
 
 ### 6.1 Install Docker
 ```
