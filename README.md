@@ -178,6 +178,8 @@ change the password immediately. You can set ssh keys to do not require copy pas
 
 If you dont want to use ethernet port for internet, but wifi instead, I recommend to check this article [https://arstech.net/raspberry-pi-4-ubuntu-wifi/](https://arstech.net/raspberry-pi-4-ubuntu-wifi/)
 
+**The easiest way is install this project via Docker**. See chapter `6. Dockerfile building and running via Docker` for more info.
+
 Now we need to install [RVM](https://rvm.io/). RVM is Ruby Version Manager and with RVM you can install multiple Ruby language versions in the same OS and switch between versions easily.
 
 Install GPG keys:  
@@ -424,7 +426,7 @@ sudo docker-compose -f docker-compose_aarch64.yml up -d
 
 You can stop it via:  
 ```
-sudo docker-compose down
+sudo docker-compose -f docker-compose_aarch64.yml down
 ```
 
 #### 6.3.2 Ram usage
