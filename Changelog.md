@@ -1,7 +1,7 @@
-## 0.2.0.beta
+## 0.1.1.beta
 - added Dockerfiles 
-- added docker and docker-comose installation doc
-- add doc about how to run the project via Docker
+- added docker and docker-compose installation doc
+- added doc about how to run the project via Docker
 
 ## 0.1.0.beta
 - initial project release
