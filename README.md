@@ -73,7 +73,7 @@ Total*: 151 EUR
 I expect you can sell the used items on bazaar after few years with 70% of buy price,
 so **your initial costs in this case would be only 46 EUR.** Also, you need to include here the saved energy costs.
 
-**Note 2:** Raspbery Pi Zero 2W was not tested by me. But based on the its parameters, it should work too.
+**Note 2:** Raspbery Pi Zero 2W was not tested by me. But based on the its parameters, it should work too. The memory consumption on the node with Home Assistant is about 500MB. Not sure, but maybe it would work on RPI ZERO 2W also for the master node.
 
 **Note 3:** Currently there is big issue with Raspberry Pi availability. The costs on Ebay are sometimes more then twice the price I'm including on this purchase list.
 
