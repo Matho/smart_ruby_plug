@@ -362,6 +362,9 @@ Log in to your raspberry pi, `cd` to the project and run:
 
 The project need the prebuilded `.so` file. 
 
+### 5.1 Running rspec on amd64 machine
+Alternatively, you can use prebuilded `libsmart_plug_C.so.for_tests` located in `lib/clibrary`. This is "empty" clibrary file, so it is able to run 
+it also on amd64 machine, without needed C packages. You can rename it to `libsmart_plug_C.so` and start the tests on  your localhost (not from rpi).
 
 ## 6. Dockerfile building and running via Docker
 

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    SmartRubyPlug (0.1.0.beta)
+    SmartRubyPlug (0.1.2.beta)
       thor (>= 1.2, < 2)
 
 GEM
