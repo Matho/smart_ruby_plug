@@ -5,11 +5,15 @@ module SmartRubyPlug
       API_STATUS_PATH = '/api/states/'.freeze
 
       def do_request
-        response = HTTParty.get(do_request_url,
-                                headers: {
-                                  "content-type" => 'application/json',
-                                  "Authorization" => "Bearer #{@long_lived_token}"
-                                })
+        begin
+          response = HTTParty.get(do_request_url,
+                                  headers: {
+                                    "content-type" => 'application/json',
+                                    "Authorization" => "Bearer #{@long_lived_token}"
+                                  })
+        rescue => e
+          return nil
+        end
 
         # request has failed, we dont know if plug is on or off
         return nil unless request_passed?(response)
