@@ -375,7 +375,7 @@ software-properties-common
 ```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
-Use proper architecture - `arm64` for > Raspberry Pi 3B or `armhf` for < Raspberry Pi 2B
+Use proper architecture - `arm64` for >= Raspberry Pi 3B or `armhf` for <= Raspberry Pi 2B
 ```
 sudo add-apt-repository \
 "deb [arch=arm64] https://download.docker.com/linux/ubuntu \
