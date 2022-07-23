@@ -9,6 +9,7 @@ module SmartRubyPlug
 
     def process
       while true do
+        #sleep(10) # TODO uncomment if you are developing on non-Raspberry Pi architecture
         SmartRubyPlug::StdoutLogger.logger.debug('Running processor with ping checks ...')
 
         smart_plug_status = smart_plug_check
@@ -26,7 +27,7 @@ module SmartRubyPlug
           @wifi_output = wifi_check
           unless @wifi_output == []
             redraw_display_with_error(@wifi_output)
-            return
+            next
           end
         end
 
@@ -34,7 +35,7 @@ module SmartRubyPlug
           @internet_output = internet_check
           unless @internet_output == []
             redraw_display_with_error(@internet_output)
-            return
+            next
           end
         end
       end
