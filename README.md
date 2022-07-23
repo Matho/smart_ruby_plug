@@ -181,7 +181,7 @@ change the password immediately. You can set ssh keys to do not require copy pas
 
 If you dont want to use ethernet port for internet, but wifi instead, I recommend to check this article [https://arstech.net/raspberry-pi-4-ubuntu-wifi/](https://arstech.net/raspberry-pi-4-ubuntu-wifi/)
 
-**The easiest way is install this project via Docker**. See chapter `6. Dockerfile building and running via Docker` for more info.
+**The easiest way is install this project via Docker**. See chapter `6. Dockerfile building and running via Docker` for more info. I recommend Docker also for the case - when the app failed (exit), the Docker container can restart the container automatically. 
 
 Now we need to install [RVM](https://rvm.io/). RVM is Ruby Version Manager and with RVM you can install multiple Ruby language versions in the same OS and switch between versions easily.
 
