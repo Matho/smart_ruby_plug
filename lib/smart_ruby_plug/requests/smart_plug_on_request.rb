@@ -6,14 +6,18 @@ module SmartRubyPlug
       SUCCESS_API_MESSAGE = 'OK'.freeze
 
       def do_request
-        response = HTTParty.post(do_request_url,
-                                 body: {
-                                   "entity_id": @plug_entity_id
-                                 }.to_json,
-                                 headers: {
-                                   "content-type" => 'application/json',
-                                   "Authorization" => "Bearer #{@long_lived_token}"
-                                 })
+        begin
+          response = HTTParty.post(do_request_url,
+                                   body: {
+                                     "entity_id": @plug_entity_id
+                                   }.to_json,
+                                   headers: {
+                                     "content-type" => 'application/json',
+                                     "Authorization" => "Bearer #{@long_lived_token}"
+                                   })
+        rescue => e
+          return false
+        end
 
         response.code == SUCCESS_API_CODE && response.message == SUCCESS_API_MESSAGE
       end
