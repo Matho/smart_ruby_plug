@@ -19,7 +19,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     doxygen \
     cmake \
     gdb \
-    sudo
+    sudo \
+    iputils-ping
 
 RUN mkdir -p /home/ubuntu/smart_ruby_plug
 WORKDIR /home/ubuntu/smart_ruby_plug
