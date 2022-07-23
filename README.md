@@ -443,3 +443,8 @@ In standby mode, without this application, it takes 180MB ram. With this app it 
 
 ## 7. TODOs
 - add display redrawer specs
+- when app is (re)started, redraw screem, to white, for example
+- cloning external libraries during Docker build from this project repo / or ftp under my control
+- do not do git clone of master branch of WiringPi library, but specific tag, to be sure things doesnt break in future
+- persist logs, instead of stdout only
+- implement log rotation and deletion, to save disk space
