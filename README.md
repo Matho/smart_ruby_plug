@@ -398,6 +398,8 @@ sudo docker run hello-world
 ```
 
 ### 6.2 Build this image
+If you want to only run the image with last version, skip to docker-compose tutorial in next section.
+
 `cd ~/docker-builds/smart_ruby_plug`  
 Pass `--no-cache` for clean build and pass correct url with C binary version for C_BINARY_PATH arg.
 
@@ -411,7 +413,7 @@ Alternatively for armv7l:
 `-d` means detached - running in background. If you do not want to run it in background (for test purposes) remove `-d` option from command line
 
 ```
-sudo docker run --privileged -d mathosk/smart_ruby_plug:v0.1.0.beta 
+sudo docker run --privileged -d mathosk/smart_ruby_plug:v0.2.0 
 ```
 
 **Note:** amd64 arch is not prebuilded, as you need to run this sw on the Raspberry Pi. 
