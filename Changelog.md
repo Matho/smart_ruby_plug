@@ -1,5 +1,6 @@
-## 0.1.3.beta
+## 0.2.0
 - fix issue, when Home Assistant node was not reachable and the exception was bubbling up, which caused app exit
+- fix the case, when app was exited, if wifi or internet IP was not reachable
 
 ## 0.1.2.beta
 - fix gemspec

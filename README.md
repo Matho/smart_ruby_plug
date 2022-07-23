@@ -402,10 +402,10 @@ sudo docker run hello-world
 Pass `--no-cache` for clean build and pass correct url with C binary version for C_BINARY_PATH arg.
 
 For aarch64:  
-`sudo docker build -t mathosk/smart_ruby_plug:v0.1.0.beta_aarch64 --build-arg ARCH=aarch64 --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/releases/download/v0.1.0.beta/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
+`sudo docker build -t mathosk/smart_ruby_plug:v0.2.0_aarch64 --build-arg ARCH=aarch64 --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/releases/download/v0.1.0.beta/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
 
 Alternatively for armv7l:  
-`sudo docker build -t mathosk/smart_ruby_plug:v0.1.0.beta_armv7l --build-arg ARCH=armv7l --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv7l_32/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
+`sudo docker build -t mathosk/smart_ruby_plug:v0.2.0_armv7l --build-arg ARCH=armv7l --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv7l_32/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
 
 ### 6.3 Execute
 `-d` means detached - running in background. If you do not want to run it in background (for test purposes) remove `-d` option from command line

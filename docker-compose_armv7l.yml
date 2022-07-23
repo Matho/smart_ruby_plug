@@ -2,7 +2,7 @@ version: "3.0"
 
 services:
   smart_ruby_plug:
-    image: "mathosk/smart_ruby_plug:v0.1.0.beta_armv7l"
+    image: "mathosk/smart_ruby_plug:v0.2.0_armv7l"
     privileged: true
     restart: always
     network_mode: bridge
