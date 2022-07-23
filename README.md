@@ -26,7 +26,8 @@ It can cut your energy bill dramatically!
 The idea is, that you will provide Raspberry Pi with LCD display to your neighbor and he will have option to turn your Starlink dish on, for case it is off (it is scheduled for turning off at midnight for each night)
 
 The hardware you need to buy:
-- you have to buy 2x Raspberry Pi (preferred is Raspberry Pi 4B, but you can use any aarch64 supported, like Raspberry Pi 3B and higher) 2GB memory model should be good enough
+- you have to buy 2x Raspberry Pi. You need min 1GB ram model for Home Assistant node and min512MB ram model for the remote device. 
+- the project works both on armv7l and aarch64
 - the first one will be used as remote control and the second one as master node with `Home Assistant` smart home software
 - then I have bought [Waveshare 1,3" IPS LCD display HAT 240×240](https://www.waveshare.com/1.3inch-lcd-hat.htm) for the RPI used to act as remote device
 - you need also some 2x MicroSD card, 32GB should be good enough
@@ -58,20 +59,21 @@ I have identified following costs:
 
 - display ... 16 EUR
 - smart plug ... 38 EUR
-- 2x Raspberry Pi 2GB model ... 2x51 EUR
+- 1x Raspberry Pi 1GB model ... 45 EUR
+- 1x Raspbery Pi Zero 2W with GPIO header .... 23 EUR 
 - 2x power adapter .. 2x10EUR
 - 2x ethernet cable ... 2x1.5EUR
 - 2x micro SD card ... 2x8EUR
 - 2x some rpi case ... optional
 - shipping for orders from eshops ... unknown/optional
 
-Total*: 195 EUR
+Total*: 151 EUR
 
 **Note:** The yearly energy bill is expected at `430Kwh` It should cost about 100 EUR / year. 
 I expect you can sell the used items on bazaar after few years with 70% of buy price,
-so **your initial costs in this case would be only 59 EUR.** Also, you need to include here the saved energy costs.
+so **your initial costs in this case would be only 46 EUR.** Also, you need to include here the saved energy costs.
 
-**Note 2:** For the remote device rpi, maybe you could use Raspberry PI Zero 2W. This model is aarch64 compatible. When you use Ubuntu Core distribution, it could be running. But it has not been tested yet.
+**Note 2:** Raspbery Pi Zero 2W was not tested by me. But based on the its parameters, it should work too.
 
 **Note 3:** Currently there is big issue with Raspberry Pi availability. The costs on Ebay are sometimes more then twice the price I'm including on this purchase list.
 
