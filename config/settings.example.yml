@@ -15,8 +15,8 @@ smart_plug:
 
 ping:
   interval: 30 # seconds
-  check_wifi: true
-  check_internet: true
+  check_wifi: false
+  check_internet: false
 
   urls:
     for_internet:

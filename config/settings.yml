@@ -1,5 +1,5 @@
 timers:
-  boot_countdown_timer: 20 # seconds
+  boot_countdown_timer: 180 # seconds
 
 internet_provider:
   name: 'Starlink'
@@ -14,9 +14,9 @@ smart_plug:
   name: 'Plug 1090'
 
 ping:
-  interval: 10 # 30 seconds
+  interval: 30 # 30 seconds - do not set too low values to do not be banned by IP's providers
   check_wifi: false
-  check_internet: false
+  check_internet: true
 
   urls:
     for_internet:

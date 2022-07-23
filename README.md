@@ -441,4 +441,3 @@ In standby mode, without this application, it takes 180MB ram. With this app it 
 
 ## 7. TODOs
 - add display redrawer specs
-- tag and push to RubyGems, once ready to use it in production
