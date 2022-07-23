@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/Matho/net-ping.git
+  revision: 640079722bac198e332802a2e63e324a26595336
+  branch: master
+  specs:
+    net-ping (2.0.8)
+
 PATH
   remote: .
   specs:
@@ -23,7 +30,6 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
     multi_xml (0.6.0)
-    net-ping (2.0.8)
     parallel (1.22.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
@@ -74,7 +80,7 @@ DEPENDENCIES
   bundler (>= 1.0, < 3)
   ffi
   httparty
-  net-ping
+  net-ping!
   require_all
   rspec
   rubocop
