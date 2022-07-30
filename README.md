@@ -232,6 +232,11 @@ The display should be working now.
 The display redrawing and detection for keypress is written via C code. Then, the `main.so` file is prepared and Ruby is calling the C functions via `FFI` gem.
 If you want to compile the C code instead of using the prebuilded binary, you can follow this steps.
 
+You need to install the ping command, via:
+```
+sudo apt-get install iputils-ping
+```
+
 **NOTE:** I expect, you need to install `BCM2835 libraries` and `wiringPi libraries` in the following steps also for cases, you would like to run on the prebuilded binary, without custom compilation.
 
 The instructions are extracted from [https://www.waveshare.com/wiki/1.3inch_LCD_HAT](https://www.waveshare.com/wiki/1.3inch_LCD_HAT)
@@ -274,6 +279,7 @@ sudo apt-get install gcc doxygen cmake gdb
 
 Build the project via Makefile (or via Clion IDE, if you have configured it correctly):
 ```
+mkdir bin
 make clean
 make
 ```
@@ -289,6 +295,11 @@ Start the ruby app:
 ```
 cd ~/smart_ruby_plug
 bin/smart_ruby_plug start
+```
+
+If it doesnt work, try:
+``` 
+bundle exec bin/smart_ruby_plug start
 ```
 
 **Using custom fonts:**  
