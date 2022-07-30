@@ -420,6 +420,10 @@ For aarch64:
 Alternatively for armv7l:  
 `sudo docker build -t mathosk/smart_ruby_plug:v0.2.0_armv7l --build-arg ARCH=armv7l --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv7l_32/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
 
+For armv6:  
+`sudo docker build -t mathosk/smart_ruby_plug:v0.2.0_armv6 --file Dockerfile.raspbian --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv6/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
+**Note:** If you have selected different user for Raspbian OS from `pi`, you need to change it in the `Dockerfile.raspbian` file to point to the correct path
+
 ### 6.3 Execute
 `-d` means detached - running in background. If you do not want to run it in background (for test purposes) remove `-d` option from command line
 
