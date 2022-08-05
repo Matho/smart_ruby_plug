@@ -1,5 +1,5 @@
 #!/bin/bash
 # If you are running on Raspbian OS, you need to change the homeuser to 'pi' or to the user you have choosen during the disk flashing
-source /home/ubuntu/.rvm/scripts/rvm
+source /home/pi/.rvm/scripts/rvm
 
-cd /home/ubuntu/smart_ruby_plug; bundle exec /home/ubuntu/smart_ruby_plug/bin/smart_ruby_plug start
+cd /home/pi/smart_ruby_plug; bundle exec /home/pi/smart_ruby_plug/bin/smart_ruby_plug start
