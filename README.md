@@ -325,6 +325,7 @@ Rewrite the generated file based on the existing C files in project
 
 ### 3.5 Start the app on reboot
 Currently, the app is not started on reboot. To do, follow this commands:
+(note: more info about service restarting can be found at [https://ma.ttias.be/auto-restart-crashed-service-systemd/](https://ma.ttias.be/auto-restart-crashed-service-systemd/))
 
 Create new file:
 ``` 
@@ -336,7 +337,13 @@ and insert there:
 [Unit]
 After=
 
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
 [Service]
+Restart=on-failure
+RestartSec=5s
+
 ExecStart=/home/ubuntu/smart_ruby_plug/bin/run.sh
 
 [Install]
@@ -456,7 +463,13 @@ sudo docker-compose -f docker-compose_aarch64.yml down
 I have installed Ubuntu 22.04 32bit edition on Raspberry Pi 2B model . This model has 1GB ram.
 In standby mode, without this application, it takes 180MB ram. With this app it is almost 200MB ram usage.
 
-## 7. TODOs
+### 7 Read-only filesystem (ram disk) instead of batteries
+You can run on PiJuice HAT / PiSugar batteries. But better way is to run on read-only filesystem. I have choosed this way.
+The good articles are at [https://medium.com/swlh/make-your-raspberry-pi-file-system-read-only-raspbian-buster-c558694de79](https://medium.com/swlh/make-your-raspberry-pi-file-system-read-only-raspbian-buster-c558694de79) and [https://grafolean.medium.com/run-docker-on-your-raspberry-pi-read-only-file-system-raspbian-1360cf94bace](https://grafolean.medium.com/run-docker-on-your-raspberry-pi-read-only-file-system-raspbian-1360cf94bace)
+I have followed both, but was not successfull with running app in Docker and read-only mode for Raspberry PI Zero. There is 512MB of ram, and
+the Docker image is pretty big. If you are running on Rpi 2B+ with more then 512MB, I expect you will succeed with read-only file system and Docker.
+
+## 8. TODOs
 - add display redrawer specs
 - when app is (re)started, redraw screem, to white, for example
 - cloning external libraries during Docker build from this project repo / or ftp under my control
