@@ -33,10 +33,14 @@ module SmartRubyPlug
 
         if @check_internet
           @internet_output = internet_check
-          unless @internet_output == []
+
+          if @internet_output == []
+            redraw_display_with_status(:on)
+          else
             redraw_display_with_error(@internet_output)
-            next
           end
+
+          next
         end
       end
     end
