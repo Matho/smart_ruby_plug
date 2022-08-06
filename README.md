@@ -170,7 +170,74 @@ Insert the token to `config/settings.yml`
 Install the `Tplink's` [Kasa Smart](https://play.google.com/store/apps/details?id=com.tplink.kasa_android&hl=sk&gl=US) mobile application and follow the instructions in mobile app.
 After successfull pairing, add the device in Home Assistant.
 
+To add new smart plug to Home Assistant, follow doc at [https://www.home-assistant.io/integrations/tplink/](https://www.home-assistant.io/integrations/tplink/)
+
+If you are connecting to SSID lets say X, you need the X network be the same, like the network where your Home Assistant node is available.
+If the networks do not mach (like at my situation) you will need to add port forwarding from network X to network Y.
+I have tried to scan open ports on smart plug via `nmap -Pn 10.0.2.105`
+The response is:
+```
+PORT     STATE SERVICE
+9999/tcp open  abyss
+```
+
+So I need to set port forwarding from port `9999` on the router, to port `9999` on the smart plug. 
+Note: The port depents on your smart plug model. If you have TPlink router, login to router IP and navigate 
+advanced > nat forwarding > virtual servers. There add port forwarding for port 9999.
+
+If the smart plug was not auto discovered by Home Assistent, do following steps: (source: [https://www.home-assistant.io/integrations/tplink/](https://www.home-assistant.io/integrations/tplink/))
+- Browse to your Home Assistant instance.  
+- In the sidebar click on  Settings.
+- From the configuration menu select: Devices & Services.
+- In the bottom right, click on the  Add Integration button.
+- From the list, search and select “TP-Link Kasa Smart”.
+
+Follow the instruction on screen to complete the set up.
+
+In the modal, insert the IP of your router, where you have set port forwarding. Do not write the IP of the smart plug, as it is in another network and is not reachable.
+
 You can check to turn on/off the plug via Home Assistant, or via REST API. The REST APIs doc is at [https://developers.home-assistant.io/docs/api/rest/](https://developers.home-assistant.io/docs/api/rest/)
+
+### 3.2.1 Postman requests
+Replace `10.0.3.3:8123` with the IP of Home Assistant node and 8123 with the port. If you havent changed it, the default port is `8123`
+
+### 3.2.1.1 Turn on/off the plug
+**Turn on:**  
+POST url: `http://10.0.3.3:8123/api/services/switch/turn_on`
+
+**Turn off:**  
+POST url: `http://10.0.3.3:8123/api/services/switch/turn_off`
+
+**Headers section:**  
+For Bearer, set your long lived token from Home Assistant:  
+```
+Content-Type: application/json
+Authorization: Bearer eyJ0eXA...
+```
+
+**Body:**  
+- select raw
+- select application/json
+- Body value: (change the `smart_zasuvka_1090` to your name)
+```
+{
+    "entity_id": "switch.smart_zasuvka_1090"
+}
+```
+
+### 3.2.1.2 Get status of plug
+(change the `smart_zasuvka_1090` to your name)  
+
+GET url: `http://10.0.3.3:8123/api/states/switch.smart_zasuvka_1090`
+
+**Headers section:**  
+For Bearer, set your long lived token from Home Assistant:
+```
+Content-Type: application/json
+Authorization: Bearer eyJ0eXA...
+```
+
+
 
 ### 3.3 SmartRubyPlug installation
 You need to install the Ubuntu OS to the rpi device, which will act as remote controller. Alternatively, Raspberry PI OS Lite for armv6 devices (PI Zero).
