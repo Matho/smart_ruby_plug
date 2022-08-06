@@ -488,6 +488,14 @@ it also on amd64 machine, without needed C packages. You can rename it to `libsm
 
 ## 6. Dockerfile building and running via Docker
 
+Note: Enable SPI interface
+```
+sudo apt-get install raspi-config
+sudo raspi-config
+# Choose Interfacing Options -> SPI -> Yes  to enable SPI interface
+sudo reboot
+```
+
 ### 6.1.1 Install Docker on RPI 2+
 ```
 sudo apt-get install \
