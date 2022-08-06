@@ -509,7 +509,63 @@ The good articles are at [https://medium.com/swlh/make-your-raspberry-pi-file-sy
 I have followed both, but was not successfully with running app in Docker and read-only mode for Raspberry PI Zero. There is 512MB of ram, and
 the Docker image is pretty big. If you are running on Rpi 2B+ with more than 512MB, I expect you will succeed with read-only file system and Docker.
 
-## 8. TODOs
+So, if you do not want to run in Docker, follow steps only from the first guide and first improvements chapter from the second one. The only difference I needed to do, is
+to prefix mount commands in `/etc/bash.bash_logout` with sudo. Eg:
+```
+sudo mount -o remount,ro /
+sudo mount -o remount,ro /boot
+```
+### 8 Use multiple wifi connection profiles
+You probably want the RPI be able connect on multiple wifi networks. One from home (during development and testing), the second from your weekend house.
+The initial wifi credentials for Raspberry PI OS was set via Imager tool.
+
+To add another wifi profile, do following steps. (Ensure, you are in read-write mode) This will generate the text, you need to copy to `wpa_supplicant.conf`
+```
+sudo wpa_passphrase my_SSID my_password
+```
+
+Paste it in file:
+```
+sudo vim /etc/wpa_supplicant/wpa_supplicant.conf
+```
+
+More info you can find at [https://raspberrypi.stackexchange.com/questions/11631/how-to-setup-multiple-wifi-networks](https://raspberrypi.stackexchange.com/questions/11631/how-to-setup-multiple-wifi-networks) 
+Also, you can set the priority.
+
+The `wpa_supplicant.conf` looks now like this:  
+```
+country=SK
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+ap_scan=1
+
+update_config=1
+network={
+	ssid="chata"
+	#psk="your-password"
+	psk=bff8df...........
+	priority=3
+}
+
+network={
+	ssid="Chata"
+	#psk="your-password"
+	psk=a496f12...........
+	priority=2
+}
+network={
+	ssid="Matho-2"
+	psk=785b22c78...........
+}
+```
+
+If you want to change the connection to another SSID based on this settings, without reboot, run following commands:  
+```
+sudo systemctl daemon-reload
+sudo systemctl restart dhcpcd
+```
+Note: You will be disconnected from your rpi, if the connection profile will be changed. Also, you will have assigned new IP address. 
+
+## 9 TODOs
 - add display redrawer specs
 - when app is (re)started, redraw screem, to white, for example
 - cloning external libraries during Docker build from this project repo / or ftp under my control
