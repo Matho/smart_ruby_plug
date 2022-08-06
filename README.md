@@ -488,7 +488,7 @@ it also on amd64 machine, without needed C packages. You can rename it to `libsm
 
 ## 6. Dockerfile building and running via Docker
 
-### 6.1 Install Docker
+### 6.1.1 Install Docker on RPI 2+
 ```
 sudo apt-get install \
 apt-transport-https \
@@ -517,20 +517,43 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
 sudo docker run hello-world
 ```
 
+### 6.1.2 Install Docker on Rpi 1/ZERO (and armv6 devices)
+Follow this steps [https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script](https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script)
+
+```
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh ./get-docker.sh
+```
+
+Then, we need to install docker-compose.
+```
+sudo apt-get install docker-compose
+```
+Note: This installation removes docker and install older version. Not sure, why it happens, but docker-compose works.
+
+Start the Docker service:  
+```
+sudo systemctl start docker.service
+```
+
 ### 6.2 Build this image
 If you want to only run the image with last version, skip to docker-compose tutorial in next section.
 
+```
+git clone https://github.com/Matho/smart_ruby_plug.git
+```
 `cd ~/docker-builds/smart_ruby_plug`  
+
 Pass `--no-cache` for clean build and pass correct url with C binary version for C_BINARY_PATH arg.
 
 For aarch64:  
-`sudo docker build -t mathosk/smart_ruby_plug:v0.2.0_aarch64 --build-arg ARCH=aarch64 --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/releases/download/v0.1.0.beta/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
+`sudo docker build -t mathosk/smart_ruby_plug:v0.3.0_aarch64 --build-arg ARCH=aarch64 --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/releases/download/v0.1.0.beta/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
 
 Alternatively for armv7l:  
-`sudo docker build -t mathosk/smart_ruby_plug:v0.2.0_armv7l --build-arg ARCH=armv7l --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv7l_32/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
+`sudo docker build -t mathosk/smart_ruby_plug:v0.3.0_armv7l --build-arg ARCH=armv7l --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv7l_32/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
 
 For armv6:  
-`sudo docker build -t mathosk/smart_ruby_plug:v0.2.0_armv6 --file Dockerfile.raspbian --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv6/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
+`sudo docker build -t mathosk/smart_ruby_plug:v0.3.0_armv6 --file Dockerfile.raspbian --build-arg C_BINARY_PATH=https://github.com/Matho/smart_ruby_plug_c_binaries/raw/master/armv6/v0.1.0/libsmart_plug_C.so.v0.1.0.beta_77865ad7af .`
 **Note:** If you have selected different user for Raspbian OS from `pi`, you need to change it in the `Dockerfile.raspbian` file to point to the correct path
 
 ### 6.3 Execute
@@ -549,7 +572,7 @@ You need to have installed the `docker-compose` package. Check it via:
 Copy `smart_ruby_plug/config/settings.yml` file with modified yml according your needs and upload it to folder
 `/data/smart_ruby_plug/config` on your Raspberry Pi. 
 
-The docker-compose file is located in this project root. Please, before you start it, point to correct version you want to pull.
+The docker-compose file is located in this project root. Please, before you start it, point to correct version you want to pull (inside docker compose yml) and specify correct arch in the filename call.
 
 You can start the project via: (use `-d` for run in background)  
 ```
