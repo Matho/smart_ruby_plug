@@ -173,7 +173,7 @@ After successfull pairing, add the device in Home Assistant.
 You can check to turn on/off the plug via Home Assistant, or via REST API. The REST APIs doc is at [https://developers.home-assistant.io/docs/api/rest/](https://developers.home-assistant.io/docs/api/rest/)
 
 ### 3.3 SmartRubyPlug installation
-You need to install the Ubuntu OS to the rpi device, which will act as remote controller.
+You need to install the Ubuntu OS to the rpi device, which will act as remote controller. Alternatively, Raspberry PI OS Lite for armv6 devices (PI Zero).
 
 You can use Raspberry Pi's Imager to prepare bootable micro SD card. Select Ubuntu 22.04 aarch64 for Raspberry Pi 4B. 
 Once the card is prepared, insert it into rpi. The default user is ubuntu and password is `ubuntu`. You will be requested to 
@@ -181,9 +181,15 @@ change the password immediately. You can set ssh keys to do not require copy pas
 
 If you dont want to use ethernet port for internet, but wifi instead, I recommend to check this article [https://arstech.net/raspberry-pi-4-ubuntu-wifi/](https://arstech.net/raspberry-pi-4-ubuntu-wifi/)
 
-**The easiest way is install this project via Docker**. See chapter `6. Dockerfile building and running via Docker` for more info. I recommend Docker also for the case - when the app failed (exit), the Docker container can restart the container automatically. 
+**Note:** If you are running on armv6 compatible device (PI Zero, PI 1), you need to flash 32bit Raspbian (Raspberry PI OS Lite). You will select the wifi and user credentials via Imager software, in the right bottom corner - the setting icon.  
+
+**Note 2:** If you have 512MB ram device and you want to use ram disk (read-only filesystem) in "production", do not follow the Docker part, you will do not have enough memory for Docker image. Follow non-docker instructions and compile ruby from source code (rvm installation).
+
+**For Docker installation** see chapter `6. Dockerfile building and running via Docker` for more info. 
 
 Now we need to install [RVM](https://rvm.io/). RVM is Ruby Version Manager and with RVM you can install multiple Ruby language versions in the same OS and switch between versions easily.
+
+`sudo apt-get update`
 
 Install GPG keys:  
 `sudo apt install gnupg2`  
@@ -193,6 +199,11 @@ Install RVM:
 ```
 curl -sSL https://get.rvm.io | bash -s stable
 ```
+Install Vim editor
+```
+sudo apt-get install vim
+```
+
 Reload RVM shell for each login:
 ```
 vim ~/.bashrc 
@@ -204,20 +215,29 @@ source ~/.rvm/scripts/rvm
 This will activate RVM after each login.
 Logout and login again.
 
-Download this SmartRubyPlug project to the home folder, eg to `/home/ubuntu/smart_ruby_plug`. Alternatively, you can use FileZilla to upload code.
+Download this SmartRubyPlug project to the home folder, eg to `/home/ubuntu/smart_ruby_plug`. If you are running Raspberry PI OS Lite, replace `ubuntu` with `pi`. 
+```
+sudo apt-get install git
+cd ~
+git clone https://github.com/Matho/smart_ruby_plug.git
+```
+
+**Note:** it is not the best to clone master branch. Clone tag with version you want to download, instead.
+
+
 Navigate to `cd ~/smart_ruby_plug`. You should be asked to switch to RVM Ruby version from project. Type `y` to yes and `enter`.
-Install the Ruby version, the RVM is asking to install. 
+Install the Ruby version, the RVM is asking to install. (do NOT use sudo before this command)
 ```
 rvm install "ruby-3.1.2"
 ```
-This could take few minutes, it will compile Ruby, if no binaries are found. 
+This could take few minutes, it will compile Ruby, if no binaries are found. On Raspberry Pi ZERO it could take up to 2.5 hours, if no binaries are found. 
 
 After Ruby is installed, you can install project dependencies.   
 `gem install bundler`  
 `bundle install`
 
-Then you need to copy the prebuilded C `.so` file. This file should be in the following project path: `lib/clibrary/libsmart_plug_C.so`
-After it, you can run the project by executing `bin/smart_ruby_plug start` from the project root.
+Then you need to copy the prebuilded C `.so` file or compile the .so file from C-code repository. This file should be in the following project path: `lib/clibrary/libsmart_plug_C.so`
+
 
 Note: Enable SPI interface
 ```
@@ -226,22 +246,12 @@ sudo raspi-config
 # Choose Interfacing Options -> SPI -> Yes  to enable SPI interface
 sudo reboot
 ```
-The display should be working now.
-
-### 3.4 Installing display dependencies and compiling the C source code
-The display redrawing and detection for keypress is written via C code. Then, the `main.so` file is prepared and Ruby is calling the C functions via `FFI` gem.
-If you want to compile the C code instead of using the prebuilded binary, you can follow this steps.
-
 You need to install the ping command, via:
 ```
 sudo apt-get install iputils-ping
 ```
 
-**NOTE:** I expect, you need to install `BCM2835 libraries` and `wiringPi libraries` in the following steps also for cases, you would like to run on the prebuilded binary, without custom compilation.
-
-The instructions are extracted from [https://www.waveshare.com/wiki/1.3inch_LCD_HAT](https://www.waveshare.com/wiki/1.3inch_LCD_HAT)
-
-To be able build the libraries, you need to install:  
+To be able build the libraries, you need to install:
 ```
 sudo apt-get install gcc cmake
 ```
@@ -267,10 +277,38 @@ gpio -v
 # Run gpio -v and version 2.70 or newer will appear. If it does not appear, it means that there is an installation error
 ```
 
-Because we are not using Python source code examples, we do not need to install Python. 
-Also, we do not need to install FBCP driver as we are not displaying the OS GUI screens, but only drawing, like on canvas. (TODO verify, it FBCP driver could improve drawing performance, or not)
+### 3.4 C-binary installation
+The display redrawing and detection for keypress is written via C code. Then, the `main.so` file is prepared and Ruby is calling the C functions via `FFI` gem.
 
-Download the C project repository code to `~/smart_ruby_plug_c`
+#### 3.4.1 Using precompiled .so file
+Download the C project binary repository:
+```
+cd ~
+git clone https://github.com/Matho/smart_ruby_plug_c_binaries.git
+```
+
+You can point symlink for Ruby project to file `/home/ubuntu/smart_ruby_plug_c/main.so`. If running on Raspbian, use `pi` instead of `ubuntu`
+
+Start the ruby app:
+```
+cd ~/smart_ruby_plug
+bundle exec bin/smart_ruby_plug start
+```
+
+#### 3.4.2 Compilation
+
+If you want to compile the C code instead of using the prebuilded binary, you can follow this steps.
+
+The instructions are extracted from [https://www.waveshare.com/wiki/1.3inch_LCD_HAT](https://www.waveshare.com/wiki/1.3inch_LCD_HAT)
+
+Because we are not using Python source code examples, we do not need to install Python. 
+Also, we do not need to install FBCP driver as we are not displaying the OS GUI screens, but only drawing, like on canvas.
+
+Download the C project repository code to 
+```
+cd ~
+git clone https://github.com/Matho/smart_ruby_plug_c.git
+```
 
 To build the C project on rpi, you need to install following dependencies:
 ```
@@ -279,13 +317,15 @@ sudo apt-get install gcc doxygen cmake gdb
 
 Build the project via Makefile (or via Clion IDE, if you have configured it correctly):
 ```
+cd ~/smart_ruby_plug_c
 mkdir bin
+# make clean will show error for the first time
 make clean
 make
 ```
 You should see new `main.so` file. You can prepare symlink for Ruby project:
 ```
-ln -s /home/ubuntu/smart_ruby_plug_c/main.so /home/ubuntu/smart_ruby_plug/lib/clibrary/libsmart_plug_C.so 
+ln -s ~/smart_ruby_plug_c/main.so ~/smart_ruby_plug/lib/clibrary/libsmart_plug_C.so 
 ```
 
 If you are going to do more work with this C project, you can setup `Clion IDE` settings to synchronize target files with your local files in IDE and run 
@@ -294,15 +334,10 @@ the building on rpi. The building works only on compatible raspberry pi, it will
 Start the ruby app:
 ```
 cd ~/smart_ruby_plug
-bin/smart_ruby_plug start
-```
-
-If it doesnt work, try:
-``` 
 bundle exec bin/smart_ruby_plug start
 ```
 
-**Using custom fonts:**  
+#### 3.4.4 Using custom fonts:
 Only few fonts and font sizes are available currently. If you want to change the font sizes to your custom, you will need to run this project [https://github.com/zst-embedded/STM32-LCD_Font_Generator](https://github.com/zst-embedded/STM32-LCD_Font_Generator)
 It needs python v3.6. To do not break your current Ubuntu system on your localhost, I recommend to start up new VM for example in `DigitalOcean`.
 If you want to install Python 3.6 on Ubuntu 22.04, you can follow this tutorial [https://stackoverflow.com/questions/72102435/how-to-install-python3-6-on-ubuntu-22-04](https://stackoverflow.com/questions/72102435/how-to-install-python3-6-on-ubuntu-22-04)
@@ -332,7 +367,7 @@ Create new file:
 sudo vim /etc/systemd/system/smart_ruby_plug.service
 ```
 
-and insert there:
+and insert there: (change `ubuntu` to `pi` for Raspberry PI Os) and `run_armv6.sh` for Raspbery PI OS.
 ```
 [Unit]
 After=
@@ -369,8 +404,8 @@ sudo systemctl status smart_ruby_plug.service
 ## 4 Start the app manually (without systemctl)
 Build the `.so` binary on your Raspberry Pi. Then copy the builded file to the `lib/clibrary/libsmart_plug_C.so`
 
-Navigate to the root folder of this app and run:
-`bin/smart_ruby_plug start`
+Navigate to the root folder of this app and run:  
+`bundle exec bin/smart_ruby_plug start`
 
 **Note:** You need to push the button for 2 seconds. Only the light click for few miliseconds doesnt register the key press event.
 
@@ -464,10 +499,15 @@ I have installed Ubuntu 22.04 32bit edition on Raspberry Pi 2B model . This mode
 In standby mode, without this application, it takes 180MB ram. With this app it is almost 200MB ram usage.
 
 ### 7 Read-only filesystem (ram disk) instead of batteries
-You can run on PiJuice HAT / PiSugar batteries. But better way is to run on read-only filesystem. I have choosed this way.
+Stop the systemctl service for this app, before you are going to setup readonly filesystem:  
+```
+sudo systemctl stop smart_ruby_plug.service
+```
+
+You can run on PiJuice HAT / PiSugar batteries. But better way is to run on read-only filesystem. I have chosen this way.
 The good articles are at [https://medium.com/swlh/make-your-raspberry-pi-file-system-read-only-raspbian-buster-c558694de79](https://medium.com/swlh/make-your-raspberry-pi-file-system-read-only-raspbian-buster-c558694de79) and [https://grafolean.medium.com/run-docker-on-your-raspberry-pi-read-only-file-system-raspbian-1360cf94bace](https://grafolean.medium.com/run-docker-on-your-raspberry-pi-read-only-file-system-raspbian-1360cf94bace)
-I have followed both, but was not successfull with running app in Docker and read-only mode for Raspberry PI Zero. There is 512MB of ram, and
-the Docker image is pretty big. If you are running on Rpi 2B+ with more then 512MB, I expect you will succeed with read-only file system and Docker.
+I have followed both, but was not successfully with running app in Docker and read-only mode for Raspberry PI Zero. There is 512MB of ram, and
+the Docker image is pretty big. If you are running on Rpi 2B+ with more than 512MB, I expect you will succeed with read-only file system and Docker.
 
 ## 8. TODOs
 - add display redrawer specs
