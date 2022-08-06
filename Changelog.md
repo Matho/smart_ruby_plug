@@ -1,4 +1,4 @@
-## 0.3.0 (unreleased)
+## 0.3.0 
 - add armv6 bash start scripts
 - add info about read-only file system
 - fix issue, when Home Assistant node was down, the internet requests was scheduled each 3 seconds instead of default 30 seconds
