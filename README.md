@@ -663,7 +663,17 @@ sudo systemctl restart dhcpcd
 ```
 Note: You will be disconnected from your rpi, if the connection profile will be changed. Also, you will have assigned new IP address. 
 
-## 9 TODOs
+## 9 Smart plug IP reservation
+It is not recommended to keep DHCP to assign address IP for your smart plug. If you are doing port forwarding for given smart plug IP, you need 
+to setup address reservation.
+
+I have used the answer from [https://community.tp-link.com/en/home/forum/topic/96168](https://community.tp-link.com/en/home/forum/topic/96168):  
+
+_The best way is to do this at your router, if it supports "Address Reservation". Find the HS100 under its current IP address in your router's Client List, and note down the MAC address. Now navigate to the router's Address Reservation menu and enter the MAC address and the required IP address. Whenever the HS100 reboots (eg when it is powered off and then on) it will be given this same address._
+
+
+
+## 10 TODOs
 - add display redrawer specs
 - when app is (re)started, redraw screem, to white, for example
 - cloning external libraries during Docker build from this project repo / or ftp under my control
