@@ -1,3 +1,8 @@
+## 0.4.0 (unreleased)
+- make faster wifi checks and smart plug on request (60 seconds to 2 seconds)
+- reduce ping timeout
+- fix closing SPI file descriptor
+
 ## 0.3.0 
 - add armv6 bash start scripts
 - add info about read-only file system
