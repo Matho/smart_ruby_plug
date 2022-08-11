@@ -26,7 +26,7 @@ module SmartRubyPlug
         array_of_hash_to_check.each do |hash|
           net_ping = Net::Ping::External.new(hash[:url])
 
-          unless net_ping.ping?
+          unless net_ping.ping?(hash[:url], 1, 0.2, 0.5)
             SmartRubyPlug::StdoutLogger.logger.info("Wifi ping - failed ping for '#{hash[:url]}'")
 
             errors = hash
