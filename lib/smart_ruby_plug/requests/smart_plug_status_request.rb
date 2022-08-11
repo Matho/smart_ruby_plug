@@ -10,7 +10,8 @@ module SmartRubyPlug
                                   headers: {
                                     "content-type" => 'application/json',
                                     "Authorization" => "Bearer #{@long_lived_token}"
-                                  })
+                                  },
+                                  open_timeout: 2.0)
         rescue => e
           return nil
         end
